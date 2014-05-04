@@ -213,12 +213,11 @@
 //    [self centerViewsVertically];
 }
 
-float M_PI2 = M_PI/2.0f;
-
 - (void)rotateViews
 {
     float angle = 0.0f;
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+	float M_PI2 = M_PI/2.0f;
     switch (orientation)
     {
         case UIInterfaceOrientationPortraitUpsideDown:
