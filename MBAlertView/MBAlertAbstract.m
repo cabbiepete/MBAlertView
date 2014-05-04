@@ -175,7 +175,9 @@ static MBAlertAbstract *currentAlert;
 
 - (void)setRotation:(NSNotification*)notification {
     if (self.viewHasLoaded){
-        [self performSelector:@selector(layoutButtonsWrapper) withObject:nil afterDelay:0.01];
+		if ([self respondsToSelector:@selector(layoutButtonsWrapper)]) {
+			[self performSelector:@selector(layoutButtonsWrapper) withObject:nil afterDelay:0.01];
+		}
     }
 }
 
