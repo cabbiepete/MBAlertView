@@ -77,8 +77,6 @@
      ]];
 }
 
-static const CGFloat buttonHeight = 40;
-
 - (void)configureConstraints
 {
     [self.view addConstraints:@[
@@ -202,6 +200,41 @@ static const CGFloat buttonHeight = 40;
         [button addTarget:nil action:nil forControlEvents:UIControlEventAllEvents];
         [button addTarget:self action:@selector(pressedButton:) forControlEvents:UIControlEventTouchUpInside];
     }];
+}
+
+// lays out button on rotation
+- (void)layoutButtonsWrapper {
+    [UIView animateWithDuration:0.3 animations:^
+	 {
+		 [self layoutButtons];
+		 [self rotateViews];
+		 
+	 }];
+//    [self centerViewsVertically];
+}
+
+float M_PI2 = M_PI/2.0f;
+
+- (void)rotateViews
+{
+    float angle = 0.0f;
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (orientation)
+    {
+        case UIInterfaceOrientationPortraitUpsideDown:
+            angle = M_PI;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            angle = - M_PI2;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            angle = M_PI2;
+            break;
+        default:
+            angle = 0.0f;
+            break;
+    }
+    self.contentView.transform = CGAffineTransformMakeRotation(angle);
 }
 
 - (void)pressedButton:(MBFlatAlertButton*)button
